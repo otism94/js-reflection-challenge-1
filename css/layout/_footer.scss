@@ -1,0 +1,160 @@
+/* Main footer */
+.main-footer {
+    display: flex;
+    background-color: $primary-dark;
+    color: $white;
+    font-size: .8125rem;
+    line-height: 1.375rem;
+    > div {
+        margin: 0;
+        padding: 0;
+    }
+    h4 {
+        text-transform: uppercase;
+        height: 17px;
+        font-size: 1rem;
+        font-weight: 400;
+        margin: 0 0 28px;
+    }
+    ul {
+        padding: 0;
+        margin: 0 0 28px;
+    }
+    @include mq('xs') { // Sets single-column layout for xs viewports
+        flex-direction: column;
+        padding: 45px 15px 43px;
+    }
+    @include mq('sm') { // Sets two-column layout for sm viewports
+        flex-flow: row wrap;
+        padding: 45px 0 43px;
+        justify-content: center;
+        margin: auto;
+        > div {
+            flex-basis: 375px;
+            max-width: 375px; // IE fix
+            padding: 0 15px;
+        }
+    }
+    @include mq('md') {
+        > div {
+            flex-basis: 485px;
+            max-width: 485px;
+        }
+    }
+    @include mq('lg') {
+        > div {
+            flex-basis: 300px;
+            max-width: 300px;
+            max-height: 221px;
+        }
+    }
+}
+
+/* Social media links sub-section */
+.ftr-socmed h4 {
+    padding-bottom: 23px;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include social-links($socmed-colours); // Sets the hover state colours for each link
+    a {
+        display: flex;
+        justify-content: center;
+        .fab {
+            font-size: 28px;
+        }
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    a:nth-child(n+4) {
+        margin-bottom: 0;
+    }
+}
+
+.grid-gap { /* Sets a consistent gap between social media links without messy padding rules */
+    flex-basis: 30px;
+    max-width: 30px;
+}
+
+.empty-social { /* Ensures the social media links' top and bottom rows are consistent */
+    flex: 1 0 40%;
+    padding: 12.5px 0;
+}
+
+/* Full-width partners section container */
+.partners-section {
+    padding: 50px 0;
+    @include mq('xs') { // Hides section in xs viewports
+        display: none;
+    }
+    @include mq('sm') { // Displays section in sm viewports and wider
+        display: block;
+    }
+}
+
+/* Partners content container */
+.partners-list {
+    display: flex;
+    justify-content: space-between;
+    max-width: 720px;
+    margin: auto;
+    div {
+        position: relative;
+        padding: 0 20px;
+    }
+    .partner-google {
+        a:hover {
+            cursor: default;
+        }
+    }
+    .partner-microsoft img,
+    .partner-future50 img,
+    .partner-qms img,
+    .partner-ncc img {
+        max-width: 100%;
+        height: 53.3px;
+        &:nth-child(n+2) {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            opacity: 0;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    @include mq('md') {
+        max-width: 940px;
+        .partner-google {
+            padding: 0 32px 0 33px;
+        }
+        .partner-microsoft img {
+            height: 85.33px;
+        }
+        .partner-future50 img {
+            height: 110.09px;
+        }
+        .partner-qms img {
+            height: 99.39px;
+        }
+        .partner-ncc img {
+            height: 80.08px;
+        }
+    }
+    @include mq('lg') {
+        max-width: 1098px;
+        .partner-google {
+            padding: 0 20px 0 19px;
+        }
+        .partner-microsoft img,
+        .partner-future50 img,
+        .partner-qms img,
+        .partner-ncc img {
+            height: 70px;
+        }
+    }
+}

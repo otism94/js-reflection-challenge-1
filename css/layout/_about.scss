@@ -1,0 +1,37 @@
+/* About section container */
+.about-section {
+    background-color: $primary-dark;
+    color: $white;
+    padding: 50px 15px;
+    h2 {
+        margin: -7px 0 27px;
+    }
+    p {
+        line-height: 1.875rem;
+        margin-bottom: 25px;
+    }
+    @include mq('sm') {
+        .about-content {
+            max-width: 720px;
+            margin: auto;
+        }
+    }
+    @include mq('md') {
+        background-image: url('../img/netmatters-logo-bg.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: right;
+        .about-content {
+            max-width: 940px;
+        }
+    }
+    @include mq('lg') {
+        background-size: auto 100%;
+        .about-content {
+            max-width: 1170px;
+            p {
+                max-width: 570px;
+            }
+        }
+    }
+}
