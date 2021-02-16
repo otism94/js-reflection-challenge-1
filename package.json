@@ -1,0 +1,30 @@
+{
+  "name": "js-reflection-challenge-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otism94/js-reflection-challenge-1.git"
+  },
+  "author": "Otis Moorman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otism94/js-reflection-challenge-1/issues"
+  },
+  "homepage": "https://github.com/otism94/js-reflection-challenge-1#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglifycss": "^1.1.0",
+    "gulp-useref": "^5.0.0",
+    "headhesive": "^1.2.4"
+  }
+}

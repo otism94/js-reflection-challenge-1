@@ -1,0 +1,144 @@
+.btn {
+    display: inline-block;
+    height: auto;
+    line-height: 35px;
+    padding: 5px 15px;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.063rem;
+    border-radius: 3px;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.btn-support {
+    width: 144.61px;
+    height: 56px;
+    color: $white;
+    font-size: 18px;
+    background-color: $btn-blue;
+    margin-right: 20px;
+    font-weight: 400;
+    &:hover {
+        background-color: $btn-blue-hvr;
+    }
+    .btn-header-content {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .fas {
+            font-size: 20px;
+            padding: 3px 0 0 1px;
+        }
+        span {
+            padding-left: 16px;
+        }
+    }
+}
+
+.btn-contact {
+    width: 152.42px;
+    height: 56px;
+    color: $white;
+    font-size: 18px;
+    background-color: $btn-grey;
+    margin-right: 20px;
+    font-weight: 400;
+    &:hover {
+        background-color: $btn-grey-hvr;
+    }
+    .btn-header-content {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .fas {
+            font-size: 23px;
+            margin-left: -3px;
+        }
+        span {
+            padding-left: 12px;
+        }
+    }
+}
+
+.btn-search {
+    position: absolute;
+    left: 174px;
+    width: 63px;
+    height: 100%;
+    padding: 15px;
+    background-color: $btn-grey;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    color: $white;
+    &:hover {
+        cursor: pointer;
+        background-color: $btn-grey-hvr;
+    }
+    @include mq('md') {
+        border-radius: 3px;
+        left: 0;
+    }
+    @include mq('lg') {
+        left: 240px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+.btn-search-xs {
+    display: flex;
+    align-items: center;
+    padding: 0 8px 1px 0;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.btn-banner {
+    position: relative;
+    min-width: 224.89px;
+    padding: 6px 19px;
+    .fas {
+        position: absolute;
+        // margin: 0 -4px 0 16px;
+        // padding-right: 1px;
+        right: 19px;
+        bottom: 22px;
+        margin-left: 16px;
+    }
+}
+
+.btn-card {
+    margin: auto auto 0;
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { // IE alignment fix
+        width: 129.73px;
+        height: 47px;
+    }
+}
+
+.btn-about {
+    width: 173.2px;
+    background-color: $btn-white;
+    color: $primary-dark;
+    padding: 6px 15px;
+    .fas {
+        margin: 0 -4px 0 12px;
+        padding: 0 1px;
+    }
+    &:hover {
+        background-color: $btn-white-hvr;
+    }
+}
+
+.btn-subscribe {
+    background-color: $btn-dark;
+    color: $white;
+    padding: 6px 16px;
+    border: none;
+        &:hover {
+            background-color: $btn-dark-hvr;
+            cursor: pointer;
+        }
+}
