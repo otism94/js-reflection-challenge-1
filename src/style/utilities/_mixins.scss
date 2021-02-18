@@ -17,6 +17,17 @@
     }
   }
 
+// Side nav colours
+@mixin side-nav-items($map) {
+    @each $itemtheme, $itemcolour in $theme-colours {
+        #sidebar-#{$itemtheme} {
+            .fas {
+                color: $itemcolour;
+            }
+        }
+    }
+}
+
 // Nav bar colours
 @mixin nav-bar-items($map) {
     @each $itemtheme, $itemcolour in $theme-colours {

@@ -1,0 +1,100 @@
+#sidebar-nav {
+    @include side-nav-items($theme-colours);
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0,.45);
+    @include mq('md') {
+        display: none;
+    }
+    .sidebar-nav-section {
+        color: $white;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 20px 20px 0;
+        &:hover {
+            .sidebar-nav-heading {
+                background-color: #3d404e;
+            }
+        }
+        .sidebar-nav-heading {
+            display: flex;
+            flex-direction: column;
+            font-size: 1.125rem;
+            padding: 19px 0 18px;
+            border-radius: 3px;
+            outline: 1px solid rgba(0,0,0,.25);
+            border: 1px solid hsla(0,0%,100%,.1);
+            .fas {
+                padding-bottom: 10px;
+                font-size: 1.438rem;
+            }
+            span {
+                font-size: .625rem;
+                padding-bottom: 1px;
+                line-height: 1.42857143;
+            }
+        }
+        .sidebar-nav-list {
+            padding: 0;
+            background-color: rgba(0,0,0,.25);
+            border-radius: 5px;
+            li {
+                font-size: 1rem;
+                letter-spacing: .4px;
+                line-height: 1.15;
+                padding: 10px;
+                border-top: 1px solid hsla(0,0%,100%,.05);
+                border-bottom: 1px solid rgba(0,0,0,.45);
+                &:first-child {
+                    border-top: 1px solid transparent;
+                }
+                &:last-child {
+                    border-bottom: 1px solid transparent;
+                }
+            }
+        }
+    }
+}
+
+#sidebar-content {
+    > div:hover {
+        .sidebar-heading {
+            background-color: #3d404e;
+        }
+    }
+    .sidebar-heading {
+        h3{
+            font-size: 1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            line-height: 1;
+            padding: 20px;
+            margin: 0;
+            border-top: 1px solid hsla(0,0%,100%,.05);
+            border-bottom: 1px solid rgba(0,0,0,.45);
+        }
+    }
+    ul {
+        padding: 0;
+        margin: 0;
+        a {
+            padding: 15px 20px;
+            text-transform: uppercase;
+            font-size: .875rem;
+            line-height: 1.42857143;
+            background-color: rgba(0,0,0,.25);
+            border-top: 1px solid hsla(0,0%,100%,.05);
+            border-bottom: 1px solid rgba(0,0,0,.45);
+            &:last-child {
+                border-bottom: 1px solid transparent;
+            }
+            li::before {
+                content: "\BB";
+                padding-right: 15px;
+            }
+        }
+    }
+}
+
+.site-overlay:hover {
+    cursor: pointer;
+}

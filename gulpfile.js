@@ -55,10 +55,28 @@ gulp.task('img', done => {
     done();
 })
 
+// Pushy compiler
+gulp.task('pushy', done => {
+    gulp.src('src/js/pushy/scss/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('src/js/pushy/css'))
+        .pipe(gulp.dest('dist/js/pushy/css'));
+    done();
+})
+
+// Headhesive minifier
+gulp.task('head-min', done => {
+    gulp.src('src/js//headhesive/headhesive.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('src/js'));
+    done();
+})
+
 // File watcher that calls the above functions
 gulp.task('watch', function() {
     gulp.watch('src/style/**/*.scss', gulp.series(['sass']));
     gulp.watch('src/js/main.js', gulp.series(['js']));
     gulp.watch('src/index.html', gulp.series(['html']));
     gulp.watch('src/img/**/*.+(png|jpeg)', gulp.series(['img']));
+    gulp.watch('src/js/pushy/scss/*.scss', gulp.series(['pushy']));
 });

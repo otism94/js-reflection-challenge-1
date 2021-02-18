@@ -262,47 +262,32 @@ header {
     }
 }
 
-/* Burger button (functionally useless) */
-.nav-burger { 
+
+.btn-burger {
     display: flex;
-    justify-content: center;
-    flex-basis: 63.03px;
-    max-width: 63.03px; // fix for IE
-    max-height: 56px;
-    align-items: center;
-    margin-left: 20px;
-    padding: 3.5px 14.215px 7.5px; // no idea
-    background-color: $btn-dark;
-    color: $white;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 56px;
     font-size: .75rem;
+    color: $white;
+    text-transform: uppercase;
     line-height: 1;
     order: 5;
     letter-spacing: normal;
-    .burger-lines {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-        width: 33px;
-        margin: 6px auto 8px;
-        .burger-line {
-            width: 33px;
-            height: 3px;
-            background-color: $white;
-            margin-bottom: 5px;
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
+    background-color: $btn-dark;
+    margin-left: 20px;
+    &:focus {
+        outline: none;
     }
     &:hover {
-        cursor: pointer;
         background-color: $btn-dark-hvr;
-        a {
-            text-decoration: none;
-        }
+    }
+    p {
+        margin: 0 0 -3px;
     }
 }
+
+
 
 /* Full-width search bar below top-nav (xs viewports only) */
 .nav-search-xs {
@@ -428,43 +413,17 @@ header {
 /* 
     Sticky header properties
 */
-
-.header--clone {
-
-    /* Required styles */
-    position: fixed;
-    z-index: 1000;
+#topbar {
+    position: absolute;
     top: 0;
     left: 0;
-  
-    /* Translate -100% to move off screen */
-    -webkit-transform: translateY(-100%);
-        -ms-transform: translateY(-100%);
-            transform: translateY(-100%);
-  
-    /* Animations */
-    -webkit-transition: all 300ms ease-in-out;
-       -moz-transition: all 300ms ease-in-out;
-            transition: all 300ms ease-in-out;
-  
-  }
-  
-  
-  /**
-   * Headhesive stick
-   * > `stick` class for the cloned element:
-   *
-   * @example
-   * var options = {
-   *   classes {
-   *     stick: 'banner--stick';
-   *   }
-   * }
-   */
-  .header--stick {
-  
-    /* Translate back to 0%; */
-    -webkit-transform: translateY(0%);
-        -ms-transform: translateY(0%);
-            transform: translateY(0%);
-  }
+    z-index: 2000;
+}
+
+#header-space {
+    position: relative;
+    height: 110px;
+    @include mq('md') {
+        height: 209px;
+    }
+}

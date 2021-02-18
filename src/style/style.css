@@ -160,6 +160,84 @@ a {
 ul {
   list-style: none; }
 
+#privacy-popup {
+  display: none;
+  overflow-y: scroll;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000000;
+  width: 100%;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.7); }
+  @media (min-width: 768px) {
+    #privacy-popup {
+      height: 100%; } }
+  #privacy-popup .popup-content {
+    width: auto;
+    height: calc(100% - 30px);
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    outline: none; }
+    @media (min-width: 768px) {
+      #privacy-popup .popup-content {
+        width: 600px;
+        height: 492px;
+        margin: auto;
+        margin-top: auto; } }
+    #privacy-popup .popup-content h2 {
+      color: #333645;
+      text-transform: none;
+      font-size: 1.625rem;
+      line-height: 1.42857143;
+      padding: 15px 20px;
+      margin: 0; }
+    #privacy-popup .popup-content .popup-line {
+      width: 100%;
+      height: 1px;
+      background-color: #ddd; }
+    #privacy-popup .popup-content .popup-text {
+      padding: 20px; }
+    #privacy-popup .popup-content p {
+      color: #666;
+      font-size: 1rem;
+      letter-spacing: .4px;
+      line-height: 1.875rem;
+      margin: 0; }
+      #privacy-popup .popup-content p:first-child {
+        margin-bottom: 25px; }
+    #privacy-popup .popup-content .popup-buttons {
+      padding: 19px 20px 20px; }
+    #privacy-popup .popup-content .btn {
+      width: 100%;
+      height: 47px;
+      color: #fff; }
+      @media (min-width: 768px) {
+        #privacy-popup .popup-content .btn {
+          width: 264px; } }
+      #privacy-popup .popup-content .btn:first-child {
+        margin-bottom: 30px; }
+        @media (min-width: 768px) {
+          #privacy-popup .popup-content .btn:first-child {
+            margin-right: 25px; } }
+      #privacy-popup .popup-content .btn span {
+        line-height: 36px; }
+    #privacy-popup .popup-content #cookies-settings {
+      background-color: #999aa2; }
+      #privacy-popup .popup-content #cookies-settings:hover {
+        background-color: #84858f; }
+    #privacy-popup .popup-content #cookies-accept {
+      background-color: #926fb1; }
+      #privacy-popup .popup-content #cookies-accept:hover {
+        background-color: #7e57a0; }
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden; }
+
 .btn {
   display: inline-block;
   height: auto;
@@ -394,6 +472,87 @@ input[type="search"]::-webkit-search-results-decoration {
   .tooltip-client:hover .tooltip-point {
     opacity: 1; }
 
+/*!
+ * Hamburgers
+ * @description Tasty CSS-animated hamburgers
+ * @author Jonathan Suh @jonsuh
+ * @site https://jonsuh.com/hamburgers
+ * @link https://github.com/jonsuh/hamburgers
+ */
+.hamburger {
+  padding: 10px 15px;
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible; }
+  .hamburger:hover {
+    opacity: 1; }
+  .hamburger.is-active:hover {
+    opacity: 1; }
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after {
+    background-color: #fff; }
+
+.hamburger-box {
+  width: 33px;
+  height: 19px;
+  display: inline-block;
+  position: relative; }
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -1.5px; }
+  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    width: 33px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 0;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease; }
+  .hamburger-inner::before, .hamburger-inner::after {
+    content: "";
+    display: block; }
+  .hamburger-inner::before {
+    top: -8px; }
+  .hamburger-inner::after {
+    bottom: -8px; }
+
+/*
+   * Spin
+   */
+.hamburger--spin .hamburger-inner {
+  transition-duration: 0.22s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+  .hamburger--spin .hamburger-inner::before {
+    transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in; }
+  .hamburger--spin .hamburger-inner::after {
+    transition: bottom 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+
+.hamburger--spin.is-active .hamburger-inner {
+  transform: rotate(225deg);
+  transition-delay: 0.12s;
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  .hamburger--spin.is-active .hamburger-inner::before {
+    top: 0;
+    opacity: 0;
+    transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out; }
+  .hamburger--spin.is-active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    transition: bottom 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1); }
+
 /* Full-width section container */
 header {
   width: 100%;
@@ -572,41 +731,25 @@ header {
     .nav-contact {
       display: inline-block; } }
 
-/* Burger button (functionally useless) */
-.nav-burger {
+.btn-burger {
   display: flex;
-  justify-content: center;
-  flex-basis: 63.03px;
-  max-width: 63.03px;
-  max-height: 56px;
-  align-items: center;
-  margin-left: 20px;
-  padding: 3.5px 14.215px 7.5px;
-  background-color: #333645;
-  color: #fff;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 56px;
   font-size: .75rem;
+  color: #fff;
+  text-transform: uppercase;
   line-height: 1;
   order: 5;
-  letter-spacing: normal; }
-  .nav-burger .burger-lines {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    width: 33px;
-    margin: 6px auto 8px; }
-    .nav-burger .burger-lines .burger-line {
-      width: 33px;
-      height: 3px;
-      background-color: #fff;
-      margin-bottom: 5px; }
-      .nav-burger .burger-lines .burger-line:last-child {
-        margin-bottom: 0; }
-  .nav-burger:hover {
-    cursor: pointer;
+  letter-spacing: normal;
+  background-color: #333645;
+  margin-left: 20px; }
+  .btn-burger:focus {
+    outline: none; }
+  .btn-burger:hover {
     background-color: #22242e; }
-    .nav-burger:hover a {
-      text-decoration: none; }
+  .btn-burger p {
+    margin: 0 0 -3px; }
 
 /* Full-width search bar below top-nav (xs viewports only) */
 @media (max-width: 767px) {
@@ -925,37 +1068,107 @@ header {
 /* 
     Sticky header properties
 */
-.header--clone {
-  /* Required styles */
-  position: fixed;
-  z-index: 1000;
+#topbar {
+  position: absolute;
   top: 0;
   left: 0;
-  /* Translate -100% to move off screen */
-  -webkit-transform: translateY(-100%);
-  -ms-transform: translateY(-100%);
-  transform: translateY(-100%);
-  /* Animations */
-  -webkit-transition: all 300ms ease-in-out;
-  -moz-transition: all 300ms ease-in-out;
-  transition: all 300ms ease-in-out; }
+  z-index: 2000; }
 
-/**
-   * Headhesive stick
-   * > `stick` class for the cloned element:
-   *
-   * @example
-   * var options = {
-   *   classes {
-   *     stick: 'banner--stick';
-   *   }
-   * }
-   */
-.header--stick {
-  /* Translate back to 0%; */
-  -webkit-transform: translateY(0%);
-  -ms-transform: translateY(0%);
-  transform: translateY(0%); }
+#header-space {
+  position: relative;
+  height: 110px; }
+  @media (min-width: 992px) {
+    #header-space {
+      height: 209px; } }
+
+#sidebar-nav {
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.45); }
+  #sidebar-nav #sidebar-software .fas {
+    color: #67809f; }
+  #sidebar-nav #sidebar-it .fas {
+    color: #4183d7; }
+  #sidebar-nav #sidebar-marketing .fas {
+    color: #2ecc71; }
+  #sidebar-nav #sidebar-telecoms .fas {
+    color: #d64541; }
+  #sidebar-nav #sidebar-design .fas {
+    color: #926fb1; }
+  #sidebar-nav #sidebar-security .fas {
+    color: #f62459; }
+  @media (min-width: 992px) {
+    #sidebar-nav {
+      display: none; } }
+  #sidebar-nav .sidebar-nav-section {
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 20px 20px 0; }
+    #sidebar-nav .sidebar-nav-section:hover .sidebar-nav-heading {
+      background-color: #3d404e; }
+    #sidebar-nav .sidebar-nav-section .sidebar-nav-heading {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.125rem;
+      padding: 19px 0 18px;
+      border-radius: 3px;
+      outline: 1px solid rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1); }
+      #sidebar-nav .sidebar-nav-section .sidebar-nav-heading .fas {
+        padding-bottom: 10px;
+        font-size: 1.438rem; }
+      #sidebar-nav .sidebar-nav-section .sidebar-nav-heading span {
+        font-size: .625rem;
+        padding-bottom: 1px;
+        line-height: 1.42857143; }
+    #sidebar-nav .sidebar-nav-section .sidebar-nav-list {
+      padding: 0;
+      background-color: rgba(0, 0, 0, 0.25);
+      border-radius: 5px; }
+      #sidebar-nav .sidebar-nav-section .sidebar-nav-list li {
+        font-size: 1rem;
+        letter-spacing: .4px;
+        line-height: 1.15;
+        padding: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.45); }
+        #sidebar-nav .sidebar-nav-section .sidebar-nav-list li:first-child {
+          border-top: 1px solid transparent; }
+        #sidebar-nav .sidebar-nav-section .sidebar-nav-list li:last-child {
+          border-bottom: 1px solid transparent; }
+
+#sidebar-content > div:hover .sidebar-heading {
+  background-color: #3d404e; }
+
+#sidebar-content .sidebar-heading h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 20px;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.45); }
+
+#sidebar-content ul {
+  padding: 0;
+  margin: 0; }
+  #sidebar-content ul a {
+    padding: 15px 20px;
+    text-transform: uppercase;
+    font-size: .875rem;
+    line-height: 1.42857143;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.45); }
+    #sidebar-content ul a:last-child {
+      border-bottom: 1px solid transparent; }
+    #sidebar-content ul a li::before {
+      content: "\BB";
+      padding-right: 15px; }
+
+.site-overlay:hover {
+  cursor: pointer; }
 
 #banner-carousel .banner-software {
   background: linear-gradient(to right, black, rgba(0, 0, 0, 0.45)), url("../img/banner/banner-software.jpeg") no-repeat center;

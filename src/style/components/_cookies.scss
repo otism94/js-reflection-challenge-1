@@ -1,0 +1,94 @@
+#privacy-popup {
+    display: none;
+    overflow-y: scroll;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000000000;
+    width: 100%;
+    padding: 30px;
+    background-color: rgba(0,0,0,.7);
+    @include mq('sm') {
+        height: 100%;
+    }
+    .popup-content {
+        width: auto;
+        height: calc(100% - 30px);
+        background-color: $white;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 5px;
+        box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+        background-clip: padding-box;
+        outline: none;
+        @include mq('sm') {
+            width: 600px;
+            height: 492px;
+            margin: auto;
+            margin-top: auto;
+        }
+        h2 {
+            color: $primary-dark;
+            text-transform: none;
+            font-size: 1.625rem;
+            line-height: 1.42857143;
+            padding: 15px 20px;
+            margin: 0;
+        }
+        .popup-line {
+            width: 100%;
+            height: 1px;
+            background-color: $primary-light;
+        }
+        .popup-text {
+            padding: 20px;
+        }
+        p {
+            color: $primary-grey;
+            font-size: 1rem;
+            letter-spacing: .4px;
+            line-height: 1.875rem;
+            margin: 0;
+            
+            &:first-child {
+                margin-bottom: 25px;
+            }
+        }
+        .popup-buttons {
+            padding: 19px 20px 20px;
+        }
+        .btn {
+            width: 100%;
+            height: 47px;
+            color: $white;
+            @include mq('sm') {
+                width: 264px;
+            }
+            &:first-child {
+                margin-bottom: 30px;
+                @include mq('sm') {
+                    margin-right: 25px;
+                }
+            }
+            span {
+                line-height: 36px;
+            }
+        }
+        #cookies-settings {
+            background-color: #999aa2;
+            &:hover {
+                background-color: #84858f;
+            }
+        }
+        #cookies-accept {
+            background-color: $btn-purp;
+            &:hover {
+                background-color: $btn-purp-hvr;
+            }
+        }
+    }
+}
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+  }
