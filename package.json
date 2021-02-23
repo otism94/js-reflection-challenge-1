@@ -24,7 +24,6 @@
     "gulp-sass": "^4.1.0",
     "gulp-uglify": "^3.0.2",
     "gulp-uglifycss": "^1.1.0",
-    "gulp-useref": "^5.0.0",
-    "headhesive": "^1.2.4"
+    "gulp-useref": "^5.0.0"
   }
 }

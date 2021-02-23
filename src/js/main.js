@@ -1,4 +1,3 @@
-let fromSideMenu = 0;
 /**
  * Scroll Lock
  */
@@ -103,12 +102,6 @@ $.scrollLock = ( function scrollLockClosure() {
             .scrollTop(  prevScroll.scrollTop );
 
         locked = false;
-
-        // Set header to fixed
-        if (prevScroll.scrollTop > headerHeight) {
-            fromSideMenu = true;
-            $('#topbar').css('position', 'fixed');
-        }
     }
 
     return function scrollLock( on ) {
@@ -145,60 +138,95 @@ $(window).resize(() => {
     }
 });
 
-// Trigger the sticky header
+// Clone header
+const createHeaderClone = () => {
+    const clonedHeader = $('#topbar').clone();
+    clonedHeader.prop('id', 'topbar-clone');
+    $('#header-space').append(clonedHeader);
+};
+
+// Unclone header
+const removeHeaderClone = () => $('#topbar-clone').remove();
+
+// Sticky header event listener
+let fromSideMenu = false;
 let lastScrollTop = 0;
-let stickyTriggered = false;
-$(window).scroll(() => {
-    const st = $(window).scrollTop();
-    // Scroll down main event
-    if (st > lastScrollTop && !stickyTriggered && !fromSideMenu) {
-        if ($('#topbar').css('position') === 'fixed') {
-            stickyTriggered = true;
-            $('#topbar').delay(200).animate({top: -headerHeight}, 200, function() {
-                $(this).css('position', 'absolute').animate({top: 0}, 0, () => stickyTriggered = false);
-            });
-        }
+$(window).on('scroll', () => {
+    // Opening/closing sidebar causes a scroll; do nothing if this is the case
+    if (!fromSideMenu) {
+        clearTimeout($.data($(this), 'scrollTimer'));
+        // Fire scroll event if haven't scrolled in 200ms
+        $.data($(this), 'scrollTimer', setTimeout(() => {
+            const st = $(window).scrollTop();
 
-    // Empty condition to prevent sticky header appearing when scrolling up while in static header range
-    } else if (st <= headerHeight) {
-
-    // Scroll up main event
-    } else if (st < lastScrollTop && st > headerHeight && !stickyTriggered) {
-        if ($('#topbar').css('position') === 'absolute') {
-            stickyTriggered = true;
-            $('#topbar').animate({top: -headerHeight}, 0, function() {
-                $(this).delay(200).css('position', 'fixed').animate({top: 0}, 200, () => stickyTriggered = false);
-            });
-        }
+            // Scroll down main event
+            if (st > lastScrollTop) {
+                if ($('#topbar').css('position') === 'fixed') {
+                    $('#topbar').animate({top: -headerHeight}, 200, () => {
+                        $('#topbar').css({'position': 'absolute',
+                                          'box-shadow': 'none'})
+                                    .animate({top: 0}, 0, () => {
+                            fromSideMenu = false;
+                            removeHeaderClone();
+                        });
+                    });
+                }
+        
+            // Unstick header if scrolled all the way to the top
+            } else if (st === 0 && $('#topbar').css('position') === 'fixed') {
+                $('#topbar').animate({top: 0}, 0, () => {
+                    $('#topbar').css({'position': 'absolute',
+                                      'box-shadow': 'none'});
+                    removeHeaderClone();
+                });
+        
+            // Empty condition to prevent sticky header appearing when scrolling up while in static header range
+            } else if (st <= headerHeight) {
+        
+            // Scroll up main event
+            } else if (st < lastScrollTop && st > headerHeight) {
+                if ($('#topbar').css('position') === 'absolute') {
+                    createHeaderClone();
+                    $('#topbar').animate({top: -headerHeight}, 0, () => {
+                        $('#topbar').css({'position': 'fixed',
+                                          'box-shadow': '0 0 30px rgba(0, 0, 0, .15)'})
+                                    .animate({top: 0}, 200);
+                    });
+                }
+            }
+            lastScrollTop = st;
+        }, 200));
     }
-    lastScrollTop = st;
 });
 
 /**
  * Side menu / Hamburger
  */
 $('.menu-btn').click(() => {
+    fromSideMenu = true;
     $('.menu-btn').toggleClass('is-active');
-    $.scrollLock( true );
+    $.scrollLock(true);
 });
 
 $('.site-overlay').click(() => {
+    setTimeout(() => {fromSideMenu = false}, 200);
     $('.menu-btn').toggleClass('is-active');
-    setTimeout(function() {fromSideMenu = false}, 1);
-    $.scrollLock( false );
+    $.scrollLock(false);
     
 });
 
 /**
  * Banner carousel
  */
+// Carousel options
 $('#banner-carousel').slick({
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 4000,
     arrows: false,
     dots: true
 });
 
+// Additional formatting for the banner buttons
 const bannerButtons = document.querySelectorAll('.btn-banner');
 for (let i = 0; i < bannerButtons.length; i++) {
     bannerButtons[i].firstElementChild.textContent += `\xa0\xa0\xa0\xa0\xa0`;
@@ -210,9 +238,11 @@ for (let i = 0; i < bannerButtons.length; i++) {
 $(document).ready(function() {
     if(localStorage.getItem('eucookie') != '123'){
         $('#privacy-popup').css('display', 'flex');
+        $.scrollLock(true);
     } 
     $('#cookies-accept').click(function() { 
         jQuery('#privacy-popup').css('display', 'none');
         localStorage.setItem('eucookie','123');
+        $.scrollLock(false);
     });
 });

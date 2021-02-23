@@ -40,13 +40,22 @@
 }
 
 .slick-dots {
-    bottom: 50px;
+    bottom: 46px;
+    @for $i from 0 through 5 {
+        #slick-slide-control0#{$i} {
+            margin-left: -4px;
+            margin-top: 1px;
+        }
+    }
     li {
-        margin: 0 8px;
+        margin: 0 5px;
         button::before {
+            width: 12px;
+            height: 12px;
+            padding-top: 5.5px;
             opacity: .25;
-            padding: 4px;
-            font-size: 11px;
+            font-size: 12px;
+            line-height: 12px;
             color: white;
         }
         button:focus {
@@ -56,7 +65,8 @@
     li.slick-active {
         button::before {
             opacity: 1;
-            padding: 2px 1px 0;
+            padding: 3.5px 3.4px 2.2px 2.9px;
+            margin-left: -3.2px;
             border-radius: 50%;
             border: 2px solid white;
             color: white;

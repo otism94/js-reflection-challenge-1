@@ -19,7 +19,7 @@ gulp.task('css', done => {
         .pipe(uglifycss({
             "uglyComments": true
         }))
-        .pipe(gulp.dest('dist/style'))
+        .pipe(gulp.dest('dist/style'));
     done();
 })
 
@@ -64,19 +64,36 @@ gulp.task('pushy', done => {
     done();
 })
 
-// Headhesive minifier
-gulp.task('head-min', done => {
-    gulp.src('src/js//headhesive/headhesive.js')
-        .pipe(uglify())
-        .pipe(gulp.dest('src/js'));
+// Pushy compiler
+gulp.task('slick', done => {
+    gulp.src('src/js/slick/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('src/js/slick'))
+        .pipe(gulp.dest('dist/js/slick'));
+    done();
+})
+
+// Plugin CSS minifier
+gulp.task('plugin-min', done => {
+    gulp.src('src/js/pushy/css/*.css')
+        .pipe(uglifycss({
+            "uglyComments": true
+        }))
+        .pipe(gulp.dest('dist/js/pushy/css'));
+    gulp.src('src/js/slick/*.css')
+        .pipe(uglifycss({
+            "uglyComments": true
+        }))
+        .pipe(gulp.dest('dist/js/slick'));
     done();
 })
 
 // File watcher that calls the above functions
 gulp.task('watch', function() {
-    gulp.watch('src/style/**/*.scss', gulp.series(['sass']));
-    gulp.watch('src/js/main.js', gulp.series(['js']));
-    gulp.watch('src/index.html', gulp.series(['html']));
-    gulp.watch('src/img/**/*.+(png|jpeg)', gulp.series(['img']));
-    gulp.watch('src/js/pushy/scss/*.scss', gulp.series(['pushy']));
-});
+    gulp.watch('src/style/**/*.scss', gulp.series('sass', 'css'));
+    gulp.watch('src/js/main.js', gulp.series('js', 'js-min'));
+    gulp.watch('src/index.html', gulp.series('html'));
+    gulp.watch('src/img/**/*.+(png|jpeg)', gulp.series('img'));
+    gulp.watch('src/js/pushy/scss/*.scss', gulp.series('pushy', 'plugin-min'));
+    gulp.watch('src/js/slick/*.scss', gulp.series('slick', 'plugin-min'));
+})

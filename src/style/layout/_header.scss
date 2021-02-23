@@ -282,7 +282,7 @@ header {
     &:hover {
         background-color: $btn-dark-hvr;
     }
-    p {
+    #burger-label {
         margin: 0 0 -3px;
     }
 }
@@ -420,9 +420,19 @@ header {
     z-index: 2000;
 }
 
+#topbar-clone {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    z-index: 1000;
+}
+
 #header-space {
     position: relative;
-    height: 110px;
+    height: 168px;
+    @include mq('sm') {
+        height: 110px;
+    }
     @include mq('md') {
         height: 209px;
     }
