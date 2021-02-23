@@ -127,6 +127,22 @@ $.scrollLock = ( function scrollLockClosure() {
 }() );
 
 /**
+ * Toggleable search bar
+ */
+let searchVisible = false;
+$('#search-toggle').on('click', () => {
+    if (!searchVisible) {
+        $('.buttons').fadeOut(200, () => {
+            $('.search-bar').fadeIn(200, () => searchVisible = true);
+        });
+    } else {
+        $('.search-bar').fadeOut(200, () => {
+            $('.buttons').fadeIn(200, () => searchVisible = false);
+        });
+    }
+})
+
+/**
  * Sticky header
  */
 // Get header height on document load and window resize
