@@ -3,6 +3,7 @@ const sass = require('gulp-sass')
 const uglifycss = require('gulp-uglifycss');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
+const htmlmin = require('gulp-html-minifier-terser');
 
 // Sass compiler
 gulp.task('sass', done => {
@@ -48,6 +49,14 @@ gulp.task('html', done => {
     done();
 })
 
+// HTML minifier
+gulp.task('html-min', done => {
+    gulp.src('src/index.html')
+        .pipe(htmlmin({caseSensitive: true, removeComments: true, collapseWhitespace: true, ignoreCustomComments: true}))
+        .pipe(gulp.dest('dist'));
+    done();
+});
+
 // Image tracker
 gulp.task('img', done => {
     gulp.src('src/img/**/*.+(png|jpeg)')
@@ -90,10 +99,10 @@ gulp.task('plugin-min', done => {
 
 // File watcher that calls the above functions
 gulp.task('watch', function() {
-    gulp.watch('src/style/**/*.scss', gulp.series('sass', 'css'));
-    gulp.watch('src/js/main.js', gulp.series('js', 'js-min'));
+    gulp.watch('src/style/**/*.scss', gulp.series('sass'));
+    gulp.watch('src/js/main.js', gulp.series('js'));
     gulp.watch('src/index.html', gulp.series('html'));
     gulp.watch('src/img/**/*.+(png|jpeg)', gulp.series('img'));
-    gulp.watch('src/js/pushy/scss/*.scss', gulp.series('pushy', 'plugin-min'));
-    gulp.watch('src/js/slick/*.scss', gulp.series('slick', 'plugin-min'));
+    gulp.watch('src/js/pushy/scss/*.scss', gulp.series('pushy'));
+    gulp.watch('src/js/slick/*.scss', gulp.series('slick'));
 })

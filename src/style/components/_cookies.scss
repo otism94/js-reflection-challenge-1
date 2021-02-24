@@ -9,8 +9,12 @@
     height: 100vh;
     padding: 30px;
     background-color: rgba(0,0,0,.7);
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        align-items: flex-start;
+   }
     .popup-content {
         width: auto;
+        height: min-content;
         background-color: $white;
         border: 1px solid rgba(0,0,0,.2);
         border-radius: 5px;
@@ -18,9 +22,13 @@
         background-clip: padding-box;
         outline: none;
         margin: auto auto;
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            margin: auto 0;
+       }
         @include mq('sm') {
             width: 600px;
             height: 492px;
+            align-items: center;
         }
         h2 {
             color: $primary-dark;

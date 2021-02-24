@@ -21,9 +21,11 @@
     "@babel/preset-env": "^7.12.16",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
+    "gulp-html-minifier-terser": "^6.0.1",
     "gulp-sass": "^4.1.0",
     "gulp-uglify": "^3.0.2",
     "gulp-uglifycss": "^1.1.0",
     "gulp-useref": "^5.0.0"
-  }
+  },
+  "dependencies": {}
 }
