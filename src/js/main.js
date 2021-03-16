@@ -1,136 +1,8 @@
 /**
- * Scroll Lock
- */
-$.scrollLock = ( function scrollLockClosure() {
-    'use strict';
-
-    var $html      = $( 'html' ),
-        // State: unlocked by default
-        locked     = false,
-        // State: scroll to revert to
-        prevScroll = {
-            scrollLeft : $( window ).scrollLeft(),
-            scrollTop  : $( window ).scrollTop()
-        },
-        // State: styles to revert to
-        prevStyles = {},
-        lockStyles = {
-            'overflow-y' : 'scroll',
-            'position'   : 'fixed',
-            'width'      : '100%'
-        };
-
-    // Instantiate cache in case someone tries to unlock before locking
-    saveStyles();
-
-    // Save context's inline styles in cache
-    function saveStyles() {
-        var styleAttr = $html.attr( 'style' ),
-            styleStrs = [],
-            styleHash = {};
-
-        if( !styleAttr ){
-            return;
-        }
-
-        styleStrs = styleAttr.split( /;\s/ );
-
-        $.each( styleStrs, function serializeStyleProp( styleString ){
-            if( !styleString ) {
-                return;
-            }
-
-            var keyValue = styleString.split( /\s:\s/ );
-
-            if( keyValue.length < 2 ) {
-                return;
-            }
-
-            styleHash[ keyValue[ 0 ] ] = keyValue[ 1 ];
-        } );
-
-        $.extend( prevStyles, styleHash );
-    }
-
-    function lock() {
-        var appliedLock = {};
-
-        // Duplicate execution will break DOM statefulness
-        if( locked ) {
-            return;
-        }
-
-        // Save scroll state...
-        prevScroll = {
-            scrollLeft : $( window ).scrollLeft(),
-            scrollTop  : $( window ).scrollTop()
-        };
-
-        // ...and styles
-        saveStyles();
-
-        // Compose our applied CSS
-        $.extend( appliedLock, lockStyles, {
-            // And apply scroll state as styles
-            'left' : - prevScroll.scrollLeft + 'px',
-            'top'  : - prevScroll.scrollTop  + 'px'
-        } );
-
-        // Then lock styles...
-        $html.css( appliedLock );
-
-        // ...and scroll state
-        $( window )
-            .scrollLeft( 0 )
-            .scrollTop( 0 );
-
-        locked = true;
-    }
-
-    function unlock() {
-        // Duplicate execution will break DOM statefulness
-        if( !locked ) {
-            return;
-        }
-
-        // Revert styles
-        $html.attr( 'style', $( '<x>' ).css( prevStyles ).attr( 'style' ) || '' );
-
-        // Revert scroll values
-        $( window )
-            .scrollLeft( prevScroll.scrollLeft )
-            .scrollTop(  prevScroll.scrollTop );
-
-        locked = false;
-    }
-
-    return function scrollLock( on ) {
-        // If an argument is passed, lock or unlock depending on truthiness
-        if( arguments.length ) {
-            if( on ) {
-                lock();
-            }
-            else {
-                unlock();
-            }
-        }
-        // Otherwise, toggle
-        else {
-            if( locked ){
-                unlock();
-            }
-            else {
-                lock();
-            }
-        }
-    };
-}() );
-
-/**
  * Toggleable search bar
  */
 let searchVisible = false;
-$('#search-toggle').on('click', () => {
+$('.btn-search-toggle').on('click', () => {
     if (!searchVisible) {
         $('.buttons').fadeOut(200, () => {
             $('.search-bar').fadeIn(200, () => searchVisible = true);
@@ -152,6 +24,8 @@ $(window).resize(() => {
     if (headerHeight !== $('#topbar').outerHeight()) {
         headerHeight = $('#topbar').outerHeight();
     }
+    const scrollBarWidth = $(window).width() - $('#header-space').width();
+    $('#topbar').css('width', `calc(100% - ${scrollBarWidth}px)`);
 });
 
 // Clone header
@@ -164,24 +38,28 @@ const createHeaderClone = () => {
 // Unclone header
 const removeHeaderClone = () => $('#topbar-clone').remove();
 
+// Check if browser is IE
+const isIE = /*@cc_on!@*/false || !!document.documentMode;
+
 // Sticky header event listener
 let fromSideMenu = false;
 let lastScrollTop = 0;
-$(window).on('scroll', () => {
+$('#container').on('scroll', function() {
     // Opening/closing sidebar causes a scroll; do nothing if this is the case
     if (!fromSideMenu) {
-        clearTimeout($.data($(this), 'scrollTimer'));
+        clearTimeout($.data(this, 'scrollTimer'));
         // Fire scroll event if haven't scrolled in 200ms
-        $.data($(this), 'scrollTimer', setTimeout(() => {
-            const st = $(window).scrollTop();
+        $.data(this, 'scrollTimer', setTimeout(() => {
+            const st = $('#container').scrollTop();
 
             // Scroll down main event
             if (st > lastScrollTop) {
                 if ($('#topbar').css('position') === 'fixed') {
                     $('#topbar').animate({top: -headerHeight}, 200, () => {
                         $('#topbar').css({'position': 'absolute',
-                                          'box-shadow': 'none'})
-                                    .animate({top: 0}, 0, () => {
+                            'width': '100%',
+                            'box-shadow': 'none'})
+                            .animate({top: 0}, 0, () => {
                             fromSideMenu = false;
                             removeHeaderClone();
                         });
@@ -191,8 +69,11 @@ $(window).on('scroll', () => {
             // Unstick header if scrolled all the way to the top
             } else if (st === 0 && $('#topbar').css('position') === 'fixed') {
                 $('#topbar').animate({top: 0}, 0, () => {
-                    $('#topbar').css({'position': 'absolute',
-                                      'box-shadow': 'none'});
+                    $('#topbar').css({
+                        'position': 'absolute',
+                        'width': '100%',
+                        'box-shadow': 'none'
+                    });
                     removeHeaderClone();
                 });
         
@@ -202,11 +83,17 @@ $(window).on('scroll', () => {
             // Scroll up main event
             } else if (st < lastScrollTop && st > headerHeight) {
                 if ($('#topbar').css('position') === 'absolute') {
-                    createHeaderClone();
+                    if (!$('#topbar-clone').length) {
+                        createHeaderClone();
+                    }
+                    const scrollBarWidth = $(window).width() - $('#header-space').width()
                     $('#topbar').animate({top: -headerHeight}, 0, () => {
-                        $('#topbar').css({'position': 'fixed',
-                                          'box-shadow': '0 0 30px rgba(0, 0, 0, .15)'})
-                                    .animate({top: 0}, 200);
+                        $('#topbar').css({
+                            'position': 'fixed',
+                            'width': `calc(100% - ${scrollBarWidth}px)`,
+                            'box-shadow': '0 0 30px rgba(0, 0, 0, .15)'
+                        })
+                            .animate({top: 0}, 200);
                     });
                 }
             }
@@ -221,14 +108,28 @@ $(window).on('scroll', () => {
 $('.menu-btn').click(() => {
     fromSideMenu = true;
     $('.menu-btn').toggleClass('is-active');
-    $.scrollLock(true);
+    $('#topbar').css({
+        'top': $('#container').scrollTop(),
+        'width': '100%'
+    });
+    isIE && $('#topbar').addClass('topbar-ie');
+    if (isIE && $('#topbar').css('position') === 'fixed') {
+        const scrollBarWidth = $(window).width() - $('#header-space').width();
+        $('#topbar').addClass('push')
+            .css('width', `calc(100% - ${scrollBarWidth}px)`);
+    }
 });
 
 $('.site-overlay').click(() => {
-    setTimeout(() => {fromSideMenu = false}, 200);
+    setTimeout(() => {
+        const scrollBarWidth = $(window).width() - $('#header-space').width()
+        $('#topbar').css('top', 0);
+        $('#topbar').css('position') === 'fixed' && $('#topbar').css('width', `calc(100% - ${scrollBarWidth}px)`)
+        isIE && $('#topbar').removeClass('topbar-ie push');
+        fromSideMenu = false;
+    }, 510); // I have no idea why this needs to be 510ms, but it does
     $('.menu-btn').toggleClass('is-active');
-    $.scrollLock(false);
-    
+
 });
 
 /**
@@ -254,11 +155,9 @@ for (let i = 0; i < bannerButtons.length; i++) {
 $(document).ready(function() {
     if(localStorage.getItem('eucookie') != '123'){
         $('#privacy-popup').css('display', 'flex');
-        $.scrollLock(true);
     } 
     $('#cookies-accept').click(function() { 
         jQuery('#privacy-popup').css('display', 'none');
         localStorage.setItem('eucookie','123');
-        $.scrollLock(false);
     });
 });

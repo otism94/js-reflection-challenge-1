@@ -1,6 +1,7 @@
 /* Full-width section container */
 header {
     width: 100%;
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -203,7 +204,7 @@ header {
         top: 0;
         left: 37px;
         width: 300px;
-        #site-search-md {
+        .site-search-md {
             width: 100%;
             height: 56px;
             border: 1px solid $accent;
@@ -265,7 +266,7 @@ header {
     &:hover {
         background-color: $btn-dark-hvr;
     }
-    #burger-label {
+    .burger-label {
         margin: 0 0 -3px;
     }
 }
@@ -418,5 +419,11 @@ header {
     }
     @include mq('md') {
         height: 209px;
+    }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .topbar-ie {
+        top: 0 !important;
     }
 }

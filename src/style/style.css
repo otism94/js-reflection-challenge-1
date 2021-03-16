@@ -127,6 +127,11 @@ template {
 * {
   box-sizing: border-box; }
 
+html {
+  overflow: hidden;
+  height: 100%;
+  -webkit-overflow-scrolling: touch; }
+
 body {
   font-family: "Poppins", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -134,7 +139,17 @@ body {
   font-size: 1rem;
   letter-spacing: .4px;
   color: #666;
-  overflow-x: hidden; }
+  overflow: hidden;
+  height: 100%;
+  -webkit-overflow-scrolling: touch; }
+
+#container {
+  position: relative;
+  overflow-x: hidden;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  max-height: 100%; }
 
 h1 {
   color: #fff;
@@ -557,6 +572,7 @@ input[type="search"]::-webkit-search-results-decoration {
 /* Full-width section container */
 header {
   width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -744,7 +760,7 @@ header {
     top: 0;
     left: 37px;
     width: 300px; }
-    .nav-search-md .search-bar #site-search-md {
+    .nav-search-md .search-bar .site-search-md {
       width: 100%;
       height: 56px;
       border: 1px solid #ccc;
@@ -754,11 +770,11 @@ header {
       padding: 5px 15px;
       font-size: 14px;
       color: #666; }
-      .nav-search-md .search-bar #site-search-md:focus {
+      .nav-search-md .search-bar .site-search-md:focus {
         outline: none;
         border: 1px solid #5bc0de;
         box-shadow: 0px 0px 8px rgba(91, 192, 222, 0.6); }
-      .nav-search-md .search-bar #site-search-md::placeholder {
+      .nav-search-md .search-bar .site-search-md::placeholder {
         color: rgba(102, 102, 102, 0.75); }
   .nav-search-md .btn-search {
     position: absolute;
@@ -796,7 +812,7 @@ header {
     outline: none; }
   .btn-burger:hover {
     background-color: #22242e; }
-  .btn-burger #burger-label {
+  .btn-burger .burger-label {
     margin: 0 0 -3px; }
 
 /* Full-width search bar below top-nav (xs viewports only) */
@@ -1138,6 +1154,10 @@ header {
     #header-space {
       height: 209px; } }
 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .topbar-ie {
+    top: 0 !important; } }
+
 #sidebar-nav {
   display: block;
   border-bottom: 1px solid rgba(0, 0, 0, 0.45); }
@@ -1232,6 +1252,28 @@ header {
 
 .site-overlay:hover {
   cursor: pointer; }
+
+@media (min-width: 992px) {
+  .pushy {
+    width: 350px; }
+  .pushy-left {
+    -webkit-transform: translate3d(-350px, 0, 0);
+    -ms-transform: translate3d(-350px, 0, 0);
+    transform: translate3d(-350px, 0, 0); }
+  .pushy-open-left #container,
+  .pushy-open-left .push {
+    -webkit-transform: translate3d(350px, 0, 0);
+    -ms-transform: translate3d(350px, 0, 0);
+    transform: translate3d(350px, 0, 0); }
+  .pushy-right {
+    -webkit-transform: translate3d(350px, 0, 0);
+    -ms-transform: translate3d(350px, 0, 0);
+    transform: translate3d(350px, 0, 0); }
+  .pushy-open-right #container,
+  .pushy-open-right .push {
+    -webkit-transform: translate3d(-350px, 0, 0);
+    -ms-transform: translate3d(-350px, 0, 0);
+    transform: translate3d(-350px, 0, 0); } }
 
 #banner-carousel .banner-software {
   background: linear-gradient(to right, black, rgba(0, 0, 0, 0.45)), url("../img/banner/banner-software.jpeg") no-repeat center;

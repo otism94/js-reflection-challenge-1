@@ -107,3 +107,39 @@
 .site-overlay:hover {
     cursor: pointer;
 }
+
+@include mq('md') {
+    .pushy {
+        width: 350px;
+    }
+
+    .pushy-left{
+        -webkit-transform: translate3d( unquote('-' + 350px) ,0,0);
+        -ms-transform: translate3d( unquote('-' + 350px) ,0,0);
+        transform: translate3d( unquote('-' + 350px) ,0,0);
+    }
+    
+    .pushy-open-left{
+        #container,
+        .push{
+            -webkit-transform: translate3d( 350px ,0,0);
+            -ms-transform: translate3d( 350px ,0,0);
+            transform: translate3d( 350px ,0,0);
+        }
+    }
+    
+    .pushy-right{
+        -webkit-transform: translate3d( 350px ,0,0);
+        -ms-transform: translate3d( 350px ,0,0);
+        transform: translate3d( 350px ,0,0);
+    }
+    
+    .pushy-open-right{
+        #container,
+        .push{
+            -webkit-transform: translate3d( unquote('-' + 350px) ,0,0);
+            -ms-transform: translate3d( unquote('-' + 350px) ,0,0);
+            transform: translate3d( unquote('-' + 350px) ,0,0);
+        }
+    }
+}

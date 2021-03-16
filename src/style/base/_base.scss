@@ -3,6 +3,12 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow: hidden;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
 body {
     font-family: $font-stack;
     -webkit-font-smoothing: antialiased;
@@ -10,7 +16,18 @@ body {
     font-size: 1rem;
     letter-spacing: .4px;
     color: $primary-grey;
+    overflow: hidden;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+#container {
+    position: relative;
     overflow-x: hidden;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    max-height: 100%;
 }
 
 h1 {
